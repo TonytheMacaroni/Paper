@@ -576,15 +576,6 @@
                  this.hurtDuration = 10;
                  this.hurtTime = this.hurtDuration;
              }
-@@ -1204,7 +_,7 @@
-                     level.broadcastDamageEvent(this, damageSource);
-                 }
- 
--                if (!damageSource.is(DamageTypeTags.NO_IMPACT) && (!flag || amount > 0.0F)) {
-+                if (!damageSource.is(DamageTypeTags.NO_IMPACT) && !flag) { // CraftBukkit - Prevent marking hurt if the damage is blocked
-                     this.markHurt();
-                 }
- 
 @@ -1219,8 +_,16 @@
                          d = damageSource.getSourcePosition().x() - this.getX();
                          d1 = damageSource.getSourcePosition().z() - this.getZ();
