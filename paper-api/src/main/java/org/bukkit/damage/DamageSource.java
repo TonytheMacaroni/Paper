@@ -1,10 +1,12 @@
 package org.bukkit.damage;
 
+import io.papermc.paper.util.PointeredMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import java.util.function.Consumer;
 
 /**
  * Represents a source of damage.
@@ -98,6 +100,13 @@ public interface DamageSource {
     public boolean scalesWithDifficulty();
 
     /**
+     * Gets the {@link PointeredMap} used for plugin-provided damage context.
+     *
+     * @return the damage cotnext
+     */
+    public PointeredMap getDamageContext();
+
+    /**
      * Create a new {@link DamageSource.Builder}.
      *
      * @param damageType the {@link DamageType} to use
@@ -144,6 +153,16 @@ public interface DamageSource {
          */
         @NotNull
         public Builder withDamageLocation(@NotNull Location location);
+
+        /**
+         * Configures the {@link PointeredMap} used for plugin-provided damage context.
+         *
+         * @param consumer a consumer
+         * @return this instgance. Allows for chained method calls
+         * @see DamageSource#getDamageContext()
+         */
+        @NotNull
+        public Builder withDamageContext(@NotNull Consumer<PointeredMap> consumer);
 
         /**
          * Create a new {@link DamageSource} instance using the supplied
